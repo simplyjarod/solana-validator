@@ -38,6 +38,7 @@ exec solana-validator \
   --identity /root/validator-keypair.json \
   --vote-account /root/vote-account-keypair.json \
   --rpc-port 8899 \
+  --full-rpc-api \
   --entrypoint entrypoint.devnet.solana.com:8001 \
   --entrypoint entrypoint2.devnet.solana.com:8001 \
   --entrypoint entrypoint3.devnet.solana.com:8001 \
