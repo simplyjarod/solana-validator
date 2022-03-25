@@ -37,6 +37,7 @@ cat > validator-start.sh <<EOF
 exec solana-validator \
   --identity /root/validator-keypair.json \
   --vote-account /root/vote-account-keypair.json \
+  --dynamic-port-range 8000-8020 \
   --rpc-port 8899 \
   --full-rpc-api \
   --entrypoint entrypoint.devnet.solana.com:8001 \
