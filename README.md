@@ -32,7 +32,7 @@ chmod u+x *.sh -R
 ```
 
 ```diff
-Please, change lines 138-139 from setup.sh accordingly to your disks configuration.
+! Please, change lines 138-139 from setup.sh accordingly to your disks configuration.
 ```
 Run `./setup.sh` as **root** from the folder this file is placed.  
 
@@ -53,4 +53,4 @@ This script will:
 ## Where to find more info
 - [Solana Documentation - Command Line](https://docs.solana.com/cli/install-solana-cli-tools)
 - [Solana Documentation - Validating](https://docs.solana.com/running-validator/validator-start)
-- [Setting up a Solana devnet validator (<a class="user-mention" data-hovercard-type="user" data-hovercard-url="/users/agjell/hovercard" href="/agjell">@agjell</a>)](https://github.com/agjell/sol-tutorials/blob/master/setting-up-a-solana-devnet-validator.md)
+- [Setting up a Solana devnet validator](https://github.com/agjell/sol-tutorials/blob/master/setting-up-a-solana-devnet-validator.md) (<a class="user-mention" data-hovercard-type="user" data-hovercard-url="/users/agjell/hovercard" href="/agjell">@agjell</a>)
