@@ -53,4 +53,15 @@ This script will:
 ## Where to find more info
 - [Solana Documentation - Command Line](https://docs.solana.com/cli/install-solana-cli-tools)
 - [Solana Documentation - Validating](https://docs.solana.com/running-validator/validator-start)
-- [Setting up a Solana devnet validator](https://github.com/agjell/sol-tutorials/blob/master/setting-up-a-solana-devnet-validator.md) (<a class="user-mention" data-hovercard-type="user" data-hovercard-url="/users/agjell/hovercard" href="/agjell">@agjell</a>)
+- [Setting up a Solana devnet validator](https://github.com/agjell/sol-tutorials/blob/master/setting-up-a-solana-devnet-validator.md) (@agjell)
+
+
+<script>
+// Thanks to https://gist.github.com/MadaraUchiha/a486bd8f93b0fc6df1bc97d9b8fca045
+window.addEventListener('load', () => {
+	for (const el of document.querySelectorAll('.markdown-body')) {
+	el.innerHTML = el.innerHTML.replace(/@(\w+)/g, (full, name) => 
+		`<a class="user-mention" data-hovercard-type="user" data-hovercard-url="/users/${name}/hovercard" href="/${name}">${full}</a>`);
+	}
+});
+</script>
