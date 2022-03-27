@@ -52,8 +52,13 @@ This script will:
 
 
 ## Nginx proxy and SSL certificates for RPC API
-By executing `setup.sh` you will be prompted wether install and config nginx+SSL or not. If you type 'yes' (or simply 'y'), the installation and setup will start.  
+By executing `setup.sh` you will be prompted wether install and config nginx+SSL or not. If you type 'yes' (or simply 'y'), the `./nginx-ssl.sh` script will start.  
+```diff
+! In order to correctly generate the SSL certificates, the (sub)domain has to be already pointing to the server before executing this script.
+```
 If you want to stop here and resume this installation later, you can do so by typing 'no' or 'n'. To install and config nginx+SSL at any moment, execute `./nginx-ssl.sh` as **root** from the folder this file is placed.  
+
+The script will prompt you for the (sub)domain to use.  
 
 This script will:
 - Install nginx.

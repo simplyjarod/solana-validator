@@ -15,7 +15,7 @@ rm -f /etc/nginx/sites-enabled/*.conf
 # Copy the template to sites-available:
 \cp nginx-site.sh /etc/nginx/sites-available/solana.conf
 
-read -r -p "What (sub)domain would you like to use? The (sub)domain has to be already pointing to the server in order to work. Do not write 'http' or 'www' (e.g. domain.com): " domain
+read -r -p "What (sub)domain would you like to use? Do not write 'http' or 'www' (e.g. domain.com): " domain
 domain=${domain,,} # tolower
 
 # Customize nginx file with domain name:
