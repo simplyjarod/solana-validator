@@ -6,6 +6,8 @@ if [[ $EUID -ne 0 ]]; then
 	exit 1
 fi
 
+setup_script_path=$(pwd) # we'll save it for later
+
 cd # will be /root
 
 # Installation of Solana and devnet choice
@@ -173,3 +175,12 @@ systemctl enable systuner
 systemctl enable validator
 systemctl start systuner
 systemctl start validator
+
+
+
+read -r -p "Would you like to install and config nginx+SSL (Let's Encrypt)? [y/N] " response
+res=${response,,} # tolower
+if [[ $res =~ ^(y|yes)$ ]]; then
+	cd $setup_script_path # nginx-ssl.sh needs to access files in its directory
+	bash ./nginx-ssl.sh
+fi
