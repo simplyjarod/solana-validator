@@ -20,6 +20,7 @@ _For best performance, use disk 1 for OS, disk 2 for accounts (swap), disk 3 for
 ### Network
 - Ports 8000 to 8020 open (TCP and UDP).
 - Ports 8899 and 8900 open (TCP).  
+
 Only if you are going to use Nginx+SSL:  
 - Ports 80 and 443 open (TCP).
 - A domain or subdomain pointing to the server.
