@@ -147,11 +147,19 @@ free -g # see total/used/free/available mem and swap (g for GB)
 # Keys generation
 solana-keygen new -o validator-keypair.json
 solana config set --keypair validator-keypair.json
-solana airdrop 1 # in devnet we can ask for 1 SOL
 solana-keygen new -o authorized-withdrawer-keypair.json
 solana-keygen new -o vote-account-keypair.json
 
-# Vote account creation
+echo "Validator account ($(solana address)) has a balance of $(solana balance)"
+
+# To successfully create the vote-account, balance is needed
+if [ "$choosen_net" == "mainnet-beta" ]; then
+read -r -p "DO NOT CONTINUE WITHOUT HAVING AT LEAST 0.3 SOL IN VALIDATOR ACCOUNT (1.1 SOL recommended). Press any key to continue " nulll
+else
+solana airdrop 1 # in devnet, we can ask for 1 SOL
+fi
+
+# Vote account creation (0.02686 SOL will be transferred from validator account)
 solana create-vote-account vote-account-keypair.json validator-keypair.json authorized-withdrawer-keypair.json
 
 echo "YOU SHOULD EXPORT/DOWNLOAD authorized-withdrawer-keypair.json NOW AND REMOVE IT FROM DISK!!!"

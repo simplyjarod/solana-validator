@@ -42,6 +42,9 @@ chmod u+x *.sh -R
 Run `./setup.sh` as **root** from the folder this file is placed.  
 
 The script will prompt you for the net to use (devnet or mainnet-beta).  
+```diff
+! ONLY if mainnet-beta is chosen, you will need to transfer -at least- 0.3 SOL during the setup (1.1 SOL recommended) in order to create the vote account properly.
+```
 
 This script will:
 - Install the [Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools) on its latest stable release.
@@ -63,7 +66,8 @@ The script will prompt you for the (sub)domain to use.
 
 This script will:
 - Install nginx.
-- Remove all default sites and create a new site that redirects http traffic to https and https trafic (port 443) to 127.0.0.1:8899 solana RPC API.
+- Remove all enabled sites (in /etc/nginx/sites-enabled)
+- Create a new site that redirects http traffic (port 80) to https (443) and proxies POST traffic (RPC) from port 443 to 127.0.0.1:8899 and GET traffic (WS) to 127.0.0.1:8900.
 - Install snap, snapd and Let's Encrypt certbot.
 - Generate SSL certificates for the specified (sub)domain.
 
