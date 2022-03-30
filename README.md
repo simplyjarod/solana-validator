@@ -1,5 +1,4 @@
 # solana-validator setup for Ubuntu
-_Tested on Ubuntu 20.04 & solana-validator 1.9.14_  
 
 1. [Requirements](#requirements)
 2. [Installation and setup process](#installation-and-setup-process)
@@ -9,22 +8,34 @@ _Tested on Ubuntu 20.04 & solana-validator 1.9.14_
 
 ## Requirements
 ### Hardware
-- Disk 1: SSD disk (as fast as possible) of -at least- 1 TB. Install OS here. Ledger will be able to use as much as 600 GB in this disk.
+- Disk 1: SSD disk (as fast as possible) of -at least- 1.5 TB. Install OS here. Ledger will be able to use as much as 1.2 TB in this disk.
 - Disk 2: SSD disk (as fast as possible) of -at least- 500 GB.
 - 256 GB RAM. A tmpfs of 300 GB will be created in RAM (with swap to disk 2).  
+- 16 cores / 32 threads of -at least- 2.8 GHz.
 
 For testing purposes (on devnet) you can use almost "any" hardware. For mainnet, at least the above requirements are needed.  
 _For best performance, use disk 1 for OS, disk 2 for accounts (swap), disk 3 for ledger (this script does not set this configuration)._
 ### Software
 - You will need to have Ubuntu installed (no special setup is needed).
 ### Network
+- Unlimited traffic usage.
+- Public Internet connection of -at least- 300 Mbps symmetric (1 Gbps preferred).
 - Ports 8000 to 8020 open (TCP and UDP).
 - Ports 8899 and 8900 open (TCP).  
 
 Only if you are going to use Nginx+SSL:  
 - Ports 80 and 443 open (TCP).
 - A domain or subdomain pointing to the server.
-
+### My setup (as a reference)
+_Following data is my configuration (tested and working)_  
+- AMD's EPYC 7502P 32 cores / 64 threads. Using about ~26 cores load average.
+- Disk 1: 1.92 TB NVMe SSD. Using about ~1.7 TB.
+- Disk 2: 960 GB NVMe SSD. Using under 100 GB (due to tmpfs RAMdisk).
+- 8 x 32 GB (256 GB total) of DDR4 ECC RAM. Using almost 100%.
+- Ubuntu 20.04.
+- solana-validator 1.9.14.
+- 1 Gbps public connection. Using about ~250 Mbps continuously and 1 Gbps peaks.
+- Average internet usage: about 3 TB/day (incoming + outgoing).
 
 ## Installation and setup process
 All commands should be executed as root. Official documentation and some people recommend creating a "sol" non-root user, but some difficulties were found from my side.  
