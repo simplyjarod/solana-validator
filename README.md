@@ -2,7 +2,7 @@
 
 1. [Requirements](#requirements)
 2. [Installation and setup process](#installation-and-setup-process)
-3. [Firewall: block TCP & UDP traffic to 8899 & 8990 ports](#firewall-block-tcp-&-udp-traffic-to-8899-&-8990-ports) (optional)
+3. [Firewall: block TCP & UDP traffic to 8899 & 8990 ports](#firewall-block-tcp--udp-traffic-to-8899--8990-ports) (optional)
 3. [Nginx proxy and SSL certificates for RPC API](#nginx-proxy-and-ssl-certificates-for-rpc-api) (optional)
 4. [Where to find more info](#where-to-find-more-info)
 
@@ -70,11 +70,13 @@ This script will:
 ## Firewall: block TCP & UDP traffic to 8899 & 8990 ports
 By executing `setup.sh` you will be prompted wether install and config firewall (iptables) or not. If you type 'yes' (or simply 'y'), the `./iptables.sh` script will start.  
 If you want to stop here and resume this installation later, you can do so by typing 'no' or 'n'. To install and config firewall (iptables) at any moment, execute `./iptables.sh` as **root** from the folder this file is placed.  
+
 This script will:
-- Install iptables firewall
+- Install iptables firewall.
 - Create a new chain called VALIDATORACCESS, with a rule to DROP all requests.
 - ACCEPT TCP and UDP requests to ports 8000-8020.
 - Send TCP and UDP requests to ports 8899 and 8900 to VALIDATORACCESS chain.  
+
 To allow any IP to access these blocked ports, just execute `iptables -I VALIDATORACCESS -s aaaa -p xxx --dport yyyy -j ACCEPT` being aaaa the IP, xxx any of *tcp* or *udp* and yyyy your desired port (8899 or 8900).  
 
 
