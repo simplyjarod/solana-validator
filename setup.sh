@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # ARE YOU ROOT (or sudo)?
 if [[ $EUID -ne 0 ]]; then
@@ -8,7 +8,7 @@ fi
 
 setup_script_path=$(pwd) # we'll save it for later
 
-cd # will be /root
+cd /root
 
 # Installation of Solana and devnet choice
 sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
@@ -56,7 +56,8 @@ cat > validator-start.sh <<EOF
 exec solana-validator \\
 	--identity /root/validator-keypair.json \\
 	--vote-account /root/vote-account-keypair.json \\
-	--dynamic-port-range 8000-8020 \\
+	--gossip-port 8000 \\
+	--dynamic-port-range 8001-8020 \\
 	--rpc-port 8899 \\
 	--full-rpc-api \\
 	--entrypoint entrypoint.${choosen_net}.solana.com:8001 \\
@@ -71,11 +72,11 @@ exec solana-validator \\
 	--only-known-rpc \\
 	--expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \\
 	--wal-recovery-mode skip_any_corrupted_record \\
+	--incremental-snapshots \\
 	--ledger /root/ledger-${choosen-net}/ \\
 	--limit-ledger-size 600000000 \\
 	--accounts /mnt/solana-accounts \\
-	--log /root/log/solana-validator.log \\
-	--no-port-check
+	--log /root/log/solana-validator.log
 EOF
 else
 cat > validator-start.sh <<EOF
@@ -184,6 +185,12 @@ systemctl enable validator
 systemctl start systuner
 systemctl start validator
 
+
+read -r -p "Would you like to install and config iptables firewall (will block all TCP and UDP connections to ports 8899 and 8990)? [y/N] " response
+res=${response,,} # tolower
+if [[ $res =~ ^(y|yes)$ ]]; then
+	bash ./iptables.sh
+fi
 
 
 read -r -p "Would you like to install and config nginx+SSL (Let's Encrypt)? [y/N] " response

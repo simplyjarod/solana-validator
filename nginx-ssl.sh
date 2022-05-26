@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # ARE YOU ROOT (or sudo)?
 if [[ $EUID -ne 0 ]]; then

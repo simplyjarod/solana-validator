@@ -2,7 +2,8 @@
 
 1. [Requirements](#requirements)
 2. [Installation and setup process](#installation-and-setup-process)
-3. [Nginx proxy and SSL certificates for RPC API](#nginx-proxy-and-ssl-certificates-for-rpc-api)
+3. [Firewall: block TCP & UDP traffic to 8899 & 8990 ports](#firewall-block-tcp-&-udp-traffic-to-8899-&-8990-ports) (optional)
+3. [Nginx proxy and SSL certificates for RPC API](#nginx-proxy-and-ssl-certificates-for-rpc-api) (optional)
 4. [Where to find more info](#where-to-find-more-info)
 
 
@@ -33,7 +34,7 @@ _Following data is my configuration (tested and working)_
 - Disk 2: 960 GB NVMe SSD. Using under 100 GB (due to tmpfs RAMdisk).
 - 8 x 32 GB (256 GB total) of DDR4 ECC RAM. Using almost 100%.
 - Ubuntu 20.04.
-- solana-validator 1.9.14.
+- solana-validator 1.9.25.
 - 1 Gbps public connection. Using about ~250 Mbps continuously and 1 Gbps peaks.
 - Average internet usage: about 3 TB/day (incoming + outgoing).
 
@@ -48,7 +49,7 @@ chmod u+x *.sh -R
 ```
 
 ```diff
-! Please, change lines 140-141 from setup.sh accordingly to your disks configuration.
+! Please, change lines 141-142 from setup.sh accordingly to your disks configuration.
 ```
 Run `./setup.sh` as **root** from the folder this file is placed.  
 
@@ -66,8 +67,19 @@ This script will:
 - Create the RAMdisk for the accounts DB (to reduce SSD wear) and RAMdisk swap (to move RAM data to SSD when more RAM is needed).
 
 
+## Firewall: block TCP & UDP traffic to 8899 & 8990 ports
+By executing `setup.sh` you will be prompted wether install and config firewall (iptables) or not. If you type 'yes' (or simply 'y'), the `./iptables.sh` script will start.  
+If you want to stop here and resume this installation later, you can do so by typing 'no' or 'n'. To install and config firewall (iptables) at any moment, execute `./iptables.sh` as **root** from the folder this file is placed.  
+This script will:
+- Install iptables firewall
+- Create a new chain called VALIDATORACCESS, with a rule to DROP all requests.
+- ACCEPT TCP and UDP requests to ports 8000-8020.
+- Send TCP and UDP requests to ports 8899 and 8900 to VALIDATORACCESS chain.  
+To allow any IP to access these blocked ports, just execute `iptables -I VALIDATORACCESS -s aaaa -p xxx --dport yyyy -j ACCEPT` being aaaa the IP, xxx any of *tcp* or *udp* and yyyy your desired port (8899 or 8900).  
+
+
 ## Nginx proxy and SSL certificates for RPC API
-By executing `setup.sh` you will be prompted wether install and config nginx+SSL or not. If you type 'yes' (or simply 'y'), the `./nginx-ssl.sh` script will start.  
+By executing `setup.sh` you will be prompted wether install and config nginx+SSL or not. If you type 'yes' (or simply 'y'), the `./nginx-ssl.sh` script will start. **If you don't know what this means or you are not sure if you need it, do not install it.**  
 ```diff
 ! In order to correctly generate the SSL certificates, the (sub)domain has to be already pointing to the server before executing this script.
 ```
