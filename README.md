@@ -48,15 +48,13 @@ unzip main.zip && cd solana-validator-main && rm -rf ../main.zip
 chmod u+x *.sh -R
 ```
 
-```diff
-! Please, change lines 141-142 from setup.sh accordingly to your disks configuration.
-```
+> ⚠️ Please, change lines 141-142 from setup.sh accordingly to your disks configuration.
+
 Run `./setup.sh` as **root** from the folder this file is placed.  
 
 The script will prompt you for the net to use (devnet or mainnet-beta).  
-```diff
-! ONLY if mainnet-beta is chosen, you will need to transfer -at least- 0.3 SOL during the setup (1.1 SOL recommended) in order to create the vote account properly.
-```
+
+> ⚠️ ONLY if mainnet-beta is chosen, you will need to transfer -at least- 0.3 SOL during the setup (1.1 SOL recommended) in order to create the vote account properly.
 
 This script will:
 - Install the [Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools) on its latest stable release.
@@ -82,9 +80,9 @@ To allow any IP to access these blocked ports, just execute `iptables -I VALIDAT
 
 ## Nginx proxy and SSL certificates for RPC API
 By executing `setup.sh` you will be prompted wether install and config nginx+SSL or not. If you type 'yes' (or simply 'y'), the `./nginx-ssl.sh` script will start. **If you don't know what this means or you are not sure if you need it, do not install it.**  
-```diff
-! In order to correctly generate the SSL certificates, the (sub)domain has to be already pointing to the server before executing this script.
-```
+
+> ⚠️ In order to correctly generate the SSL certificates, the (sub)domain has to be already pointing to the server before executing this script.
+
 If you want to stop here and resume this installation later, you can do so by typing 'no' or 'n'. To install and config nginx+SSL at any moment, execute `./nginx-ssl.sh` as **root** from the folder this file is placed.  
 
 The script will prompt you for the (sub)domain to use.  
